@@ -19,9 +19,12 @@ fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
     })
 
 
+const cryptos = ['bitcoin', 'ethereum', 'cardano', 'solana', 'dogecoin', 'binancecoin']
 
+let count = 0
 
-fetch('https://api.coingecko.com/api/v3/coins/bitcoin')
+async function fetchCryptoInfo(){
+    fetch(`https://api.coingecko.com/api/v3/coins/${cryptos[count]}`)
     .then(res => {
         if(!res.ok){
             throw Error('something is wrong')
@@ -41,9 +44,34 @@ fetch('https://api.coingecko.com/api/v3/coins/bitcoin')
     })
     .catch(err => alert(err))
 
+    if (count < 5){
+        count++
+    }else{
+        count = 0
+    }
+}
+
+setInterval(fetchCryptoInfo, 5000)
+
 setInterval(function(){
     const now = new Date();
     const time = now.toLocaleString('en-US', { timeStyle: "short" })
     document.getElementById('time').textContent = time
 },1000)
     
+  
+ async function success(pos) {
+    const myWeatherKey = 'a286a3b6b4c2b61d8d57c51d29aa5e7f'
+    const crd = pos.coords;
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=${myWeatherKey}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
+  }
+  
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+  
+  navigator.geolocation.getCurrentPosition(success, error);
+  

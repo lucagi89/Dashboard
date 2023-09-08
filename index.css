@@ -32,6 +32,11 @@ main{
     text-align: center;
 }
 
+#crypto{
+    width:150px;
+    height: 200px;
+}
+
 #crypto-top{
     display: flex;
     justify-content: space-between;
