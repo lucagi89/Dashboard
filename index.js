@@ -41,7 +41,9 @@ fetch('https://api.coingecko.com/api/v3/coins/bitcoin')
     })
     .catch(err => alert(err))
 
-
+setInterval(function(){
     const now = new Date();
     const time = now.toLocaleString('en-US', { timeStyle: "short" })
     document.getElementById('time').textContent = time
+},1000)
+    
