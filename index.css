@@ -32,13 +32,14 @@ main{
     text-align: center;
 }
 
-#crypto{
+#crypto-top{
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap:10px;
+    font-size: 1.5rem;
 }
 
-#crypto img{
-    width:30px;
+#crypto-top img{
+    width:40px;
 }

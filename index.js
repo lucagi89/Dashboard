@@ -21,17 +21,27 @@ fetch('https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 
 
 
-fetch('https://api.coingecko.com/api/v3/coins/dogecoin')
+fetch('https://api.coingecko.com/api/v3/coins/bitcoin')
     .then(res => {
         if(!res.ok){
             throw Error('something is wrong')
         }
         return res.json()})
     .then(data => {
-        console.log(data)
-        document.getElementById('logo').src = data.image.small
-        document.getElementById('name').innerText = data.name
-        document.getElementById('price').textContent = data.market_data.current_price.gbp + " £"
+        document.getElementById('crypto-top').innerHTML = `
+                    <img src="${data.image.small}" id="logo">
+                    <p id="name">${data.name}</p>
+        `
+        document.getElementById('crypto-bottom').innerHTML = `
+        <p>📍: £${data.market_data.current_price.gbp}</p>
+        <p>📈: £${data.market_data.high_24h.gbp}</p>
+        <p>📉: £${data.market_data.low_24h.gbp}</p>
+        `
         
     })
     .catch(err => alert(err))
+
+
+    const now = new Date();
+    const time = now.toLocaleString('en-US', { timeStyle: "short" })
+    document.getElementById('time').textContent = time
