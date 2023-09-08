@@ -73,8 +73,9 @@ setInterval(function(){
         console.log(data)
         document.getElementById('weather').innerHTML =`
                 <img src='https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png'/>
+                <h1>${Math.round(data.main.temp)}°</h1>
                 <p>${data.name}</p>
-                <p>${Math.round(data.main.temp)}°</p>`
+                `
         })
         .catch(err => console.error(err))
   }
