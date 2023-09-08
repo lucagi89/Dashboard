@@ -63,10 +63,19 @@ setInterval(function(){
  async function success(pos) {
     const myWeatherKey = 'a286a3b6b4c2b61d8d57c51d29aa5e7f'
     const crd = pos.coords;
-
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=${myWeatherKey}`)
-        .then(res => res.json())
-        .then(data => console.log(data))
+    console.log(pos)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&appid=${myWeatherKey}`)
+        .then(res => {
+            if(!res.ok){
+                throw Error('Weather data not available')
+            }
+            return res.json()})
+        .then(data =>
+        document.getElementById('weather').innerHTML +=`
+                <img src='https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png'/>`
+        
+        )
+        .catch(err => console.error(err))
   }
   
   function error(err) {
